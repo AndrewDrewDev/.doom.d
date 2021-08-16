@@ -1,0 +1,47 @@
+#+TITLE: Doom Emacs Configuration
+
+* Debian 10 :: Compiling Emacs from source
+
+1. Скачиваем основные зависимости для компиляции исходников
+
+: sudo apt-get build-dep emacs24
+
+2. Скачиваем дополнительные зависимости для компиляции исходников
+
+: sudo apt-get -y install libgtk-3-dev libgccjit-8-dev
+
+3. Проверка зависимостей перед компиляцией
+
+: ./autogen.sh
+
+4. Конфигурирование модулей
+
+#+BEGIN_SRC sh
+
+./configure --with-nativecomp \
+    --with-json \
+    --with-modules \
+    --with-threads \
+    --with-harfbuzz \
+    --with-compress-install \
+    --with-included-regex \
+    --with-zlib \
+    --without-sound \
+    --disable-silent-rules \
+    --with-file-notification=inotify  \
+    --with-x=yes \
+    --with-x-toolkit=gtk3 \
+    --with-lcms2 \
+    --with-imagemagick
+
+#+END_SRC
+
+5. Компиляция
+
+: make -j4
+
+4 - Количество ядер.
+
+6. Установка в систему
+
+: sudo make install
