@@ -50,4 +50,6 @@
 ;(unpin! t)
 
 (package! dired-atool)
+(package! prettier)
+
 (disable-packages! hl-line)

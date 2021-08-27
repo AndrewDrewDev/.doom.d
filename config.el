@@ -1,9 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(defun my/indent-buffer()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
+;; Active russian keyboard layout
 (defun reverse-input-method (input-method)
   "Build the reverse mapping of single letters from INPUT-METHOD."
   (interactive
@@ -26,6 +23,8 @@
                 (vector (append mod (list to)))))))))
     (when input-method
       (activate-input-method current))))
+
+(reverse-input-method 'russian-computer)
 
 (defun xah/open-in-external-app ()
   "Open the current file or dired marked files in external app."
@@ -91,7 +90,7 @@
          (message "File path copied: %s" $fpath)
          $fpath )))))
 
-(defun dr/dired-get-size ()
+(defun my/dired-get-size ()
   (interactive)
   (let ((files (dired-get-marked-files)))
     (with-temp-buffer
@@ -101,50 +100,40 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*итого$")
                  (match-string 1))))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Оpen emacs fullscrean
 (toggle-frame-maximized)
+;; Make parameter emacs frame
+(set-frame-parameter (selected-frame) 'alpha '(85))
 
-;; Active russian keyboard
-(reverse-input-method 'russian-computer)
-
-(setq user-full-name "Andrew Drew"
-      user-mail-address "john@doe.com"
-      doom-font (font-spec :family "Iosevka" :size 10.3)
-      doom-theme 'doom-one
-      ;; If you use `org' and don't want your org files in the default location below,
-      ;; change `org-directory'. It must be set before org loads!
-      org-directory "~/DA/Org/"
-      ;; This determines the style of line numbers in effect. If set to `nil', line
-      ;; numbers are disabled. For relative line numbers, set this to `relative'.
-      display-line-numbers-type nil
-      ;; Итеремещении на camelCase
-      global-subword-mode t
-      ;; Настройка растояния в 10 символов отступа от верха при скролинге.
-      scroll-margin 10
-      ;; Включение общего буфера обмена с Emacs
-      save-interprogram-paste-before-kill t
-      ;; isearch matching counter
-      isearch-lazy-count t
-      ;; Dont create file ".log" for js files
-      lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")
-      ;; Path to bookmark file
-      bookmark-file "~/.doom.d/bookmarks"
-      ;; Высота modelibe +light
-      +modeline-height 25
-      ;; Отображение буфера *scratch* в bs
-      bs-configurations
-      '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last))
-      )
+(setq
+ doom-font (font-spec :family "Iosevka" :size 10.3)
+ doom-theme 'doom-one
+ org-directory "~/DA/Org/"
+ ;; Disable view left display line number
+ display-line-numbers-type nil
+ ;; Итеремещении на camelCase
+ global-subword-mode t
+ ;; Настройка растояния в 10 символов отступа от верха при скролинге.
+ scroll-margin 10
+ ;; Share copy ring with system
+ save-interprogram-paste-before-kill t
+ ;; isearch matching counter
+ isearch-lazy-count t
+ ;; Dont create file ".log" for js files
+ lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/dev/stderr")
+ ;; Path to bookmark file
+ bookmark-file "~/.doom.d/bookmarks"
+ ;; Высота modelibe +light
+ +modeline-height 25
+ ;; Show *scratch* в bs
+ bs-configurations
+ '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last))
+ )
 
 (after! dired
-  ;; Удаление скрытия . .. в дирете
+  ;; Add .. and . to dired
   (remove-hook! 'dired-mode-hook 'dired-omit-mode nil)
-
-  ;; Автоматическое скрытие дополнительной информации
   ;; (add-hook! 'dired-mode-hook 'dired-hide-details-mode)
-
 
   (setq
    ;; Всегда рекурсивное копирование
@@ -152,25 +141,13 @@
    ;; Перемещать файлы в корзину при удаленнии
    delete-by-moving-to-trash t
 
-   ;; Формат отображения каталогов в =Dired=
-   ;; Параметр -ahl --time-style=long-iso - вызывает проблемы с
-   ;; отображением под Windows
    ;; dired-listing-switches "-ahl -v"
    )
-
-  (map! :map dired-mode-map
-        ;; Raname Files
-        "r"  #'dired-toggle-read-only
-        ;; Get files size or size of grop marked files
-        "?"  #'dr/dired-get-size
-        ;; Move higher in the file system tree
-        "b"  #'dired-jump
-        ;; Replace native emacs copy function on rsync
-        "C"  #'dired-rsync))
+  )
 
 (after! org
   (setq
-   ;; Add LOGBOOK
+   ;; Add LOGBOOK drawer
    org-log-into-drawer "LOGBOOK"
    ;; Hide headers after open file
    org-startup-folded t
@@ -184,22 +161,30 @@
  "M-/"     #'hippie-expand ;; En
  "M-."     #'hippie-expand ;; Ru
  "M-@"     #'er/expand-region
- "<f8>"    #'toggle-truncate-lines
- "M-1"          #'bs-show
- "C-%" #'query-replace
- "M-%" #'replace-string
- "C->" #'mc/mark-next-like-this
- "C-<" #'mc/mark-previous-like-this
+ ;; "<f8>"    #'toggle-truncate-lines
+ "M-1"     #'bs-show
+ "C-%"     #'query-replace
+ "M-%"     #'replace-string
+ "C->"     #'mc/mark-next-like-this
+ "C-<"     #'mc/mark-previous-like-this
 
  ;; My/Custom keybindings (have external functions)
  "C-x 4 e" #'xah/open-in-external-app
- "\e\e g" #'xah/google-translete-word
- "\e\e p" #'xah-copy-file-path
- "C-M-|" #'my/indent-buffer ;; En
- "C-M-/" #'my/indent-buffer ;; Ru
+ "\e\e g"  #'xah/google-translete-word
+ "\e\e p"  #'xah-copy-file-path
 
  ;; TODO: Ask father for a function
  ;; "\e\e s" #'my/search-in-browser
+
+ :map dired-mode-map
+ ;; Raname Files
+ "r"  #'dired-toggle-read-only
+ ;; Get files size or size of grop marked files
+ "?"  #'my/dired-get-size
+ ;; Move higher in the file system tree
+ "b"  #'dired-jump
+ ;; Replace native emacs copy function on rsync
+ "C"  #'dired-rsync
  )
 
 ;; Pack/unpack files with atool on dired.
@@ -207,3 +192,8 @@
   :defer t
   :init
   (dired-atool-setup))
+
+(use-package! prettier
+  :defer t
+  :init
+  (add-hook 'after-init-hook #'global-prettier-mode))
