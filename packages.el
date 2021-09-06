@@ -52,4 +52,7 @@
 (package! dired-atool)
 (package! prettier)
 
+(package! tree-sitter)
+(package! tree-sitter-langs)
+
 (disable-packages! hl-line)
