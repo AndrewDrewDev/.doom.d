@@ -103,7 +103,7 @@
 ;; Оpen emacs fullscrean
 (toggle-frame-maximized)
 ;; Make parameter emacs frame
-(set-frame-parameter (selected-frame) 'alpha '(85))
+;; (set-frame-parameter (selected-frame) 'alpha '(85))
 
 (setq
  doom-font (font-spec :family "Iosevka" :size 10.3)
