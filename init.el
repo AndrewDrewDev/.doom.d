@@ -118,7 +118,7 @@
        ;;coq                  ; proofs-as-programs
        ;;crystal              ; ruby at the speed of c
        ;;csharp               ; unity, .NET, and mono shenanigans
-       (data +lsp)            ; config/data formats
+       data            ; config/data formats
        ;;(dart +flutter)      ; paint ui and not much else
        ;;dhall
        ;;elixir               ; erlang done right
@@ -135,9 +135,9 @@
        ;;(haskell +dante)     ; a language that's lazier than I am
        ;;hy                   ; readability of scheme w/ speed of python
        ;;idris                ; a language you can depend on
-       (json +lsp)            ; At least it ain't XML
+       json            ; At least it ain't XML
        ;;(java +meghanada)    ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)      ; all(hope(abandon(ye(who(enter(here))))))
+       javascript       ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia                ; a better, faster MATLAB
        ;;kotlin               ; a better, slicker Java(Script)
        ;;latex                ; writing papers in Emacs has never been so fun
@@ -162,12 +162,12 @@
        ;;rust                 ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                ; java, but good
        ;;(scheme +guile)      ; a fully conniving family of lisps
-       (sh +lsp +fish)        ; she sells {ba,z,fi}sh shells on the C xor
+       (sh +fish)        ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity             ; do you need a blockchain? No.
        ;;swift                ; who asked for emoji variables?
        ;;terra                ; Earth and Moon in alignment for performance.
-       (web +lsp)             ; the tubes
+       web             ; the tubes
        yaml                   ; JSON, but readable
        ;;zig                  ; C, but simpler
 

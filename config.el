@@ -193,14 +193,14 @@
   :init
   (dired-atool-setup))
 
-(use-package! prettier
-  :defer t
-  :init
-  (add-hook 'after-init-hook #'global-prettier-mode))
+;; (use-package! prettier
+;;   :defer t
+;;   :init
+;;   (add-hook 'after-init-hook #'global-prettier-mode))
 
 
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
