@@ -107,7 +107,7 @@
 
 (setq
  doom-font (font-spec :family "Iosevka" :size 10.3)
- doom-theme 'doom-one
+ doom-theme 'doom-dracula
  org-directory "~/DA/Org/"
  ;; Disable view left display line number
  display-line-numbers-type nil

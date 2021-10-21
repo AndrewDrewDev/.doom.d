@@ -23,6 +23,9 @@
 ("*DA:Локальная Рабочая Директория"
  (filename . "~/DA/")
  (position . 1))
+("*JobProjects:Локальная Рабочая Директория"
+ (filename . "~/DA/Job-Projects")
+ (position . 1))
 ("*Home:Desktop:Рабочий Стол"
  (filename . "~/Рабочий стол/")
  (position . 1))
