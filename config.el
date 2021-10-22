@@ -1,5 +1,18 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Indent setting
+
+(setq
+ evil-shift-width 2
+ tab-width 2
+ typescript-indent-level 2
+ js-indent-level 2
+ js2-basic-offset 2
+ web-mode-markup-indent-offset 2
+ web-mode-code-indent-offset 2
+ web-mode-auto-close-style 2
+ )
+
 ;; Active russian keyboard layout
 (defun reverse-input-method (input-method)
   "Build the reverse mapping of single letters from INPUT-METHOD."
