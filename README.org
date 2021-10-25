@@ -45,3 +45,18 @@
 6. Установка в систему
 
 : sudo make install
+
+* Install lsp servers and other dependencies
+
+#+begin_src sh
+
+npm i -g tree-sitter-cli@latest
+npm i -g bash-language-server@latest
+npm i -g dockerfile-language-server-nodejs@latest
+npm i -g typescript-language-server@latest
+npm i -g typescript@latest
+npm i -g vscode-json-languageserver@latest
+npm i -g unified-language-server@latest # markdown
+go get github.com/lighttiger2505/sqls
+
+#+end_src
