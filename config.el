@@ -70,6 +70,7 @@
 (map!
  ;; Doom/Vanila keybindings
  "C-z" nil
+ "C-S-W"       #'kill-whole-line
  "M-/"       #'hippie-expand ;; En
  "M-."       #'hippie-expand ;; Ru
  "M-@"       #'er/expand-region
@@ -98,7 +99,7 @@
  ;; Move higher in the file system tree
  "b"  #'dired-jump
  ;; Replace native emacs copy function on rsync
- ;; "C"  #'dired-rsync
+ "C"  #'dired-rsync
  )
 
 ;; Pack/unpack files with atool on dired.
@@ -107,11 +108,11 @@
   :init
   (dired-atool-setup))
 
-;; Add npm prettier package - web files code formater
-(use-package! prettier
+;; Format buffer using some formatters
+(use-package! apheleia
   :defer t
   :init
-  (add-hook 'after-init-hook #'global-prettier-mode))
+  (apheleia-global-mode +1))
 
 ;; tree-sitter - parser for all language
 (use-package! tree-sitter

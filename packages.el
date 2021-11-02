@@ -50,7 +50,7 @@
 ;(unpin! t)
 
 (package! dired-atool)
-(package! prettier)
+(package! apheleia)
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
