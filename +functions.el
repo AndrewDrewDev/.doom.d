@@ -45,11 +45,10 @@
           (when (and (characterp from) (characterp to))
             (dolist (mod modifiers)
               (define-key local-function-key-map
-                (vector (append mod (list from)))
-                (vector (append mod (list to)))))))))
+                          (vector (append mod (list from)))
+                          (vector (append mod (list to)))))))))
     (when input-method
       (activate-input-method current))))
-
 (reverse-input-method 'russian-computer)
 
 (defun xah/open-in-external-app ()
@@ -77,22 +76,6 @@
         (mapc
          (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) ξfile-list)))))
   )
-
-(defun xah/google-translete-word ()
-  "The function opens the selected word or several words in Google translator."
-  (interactive)
-  (require 'browse-url)
-  (let (myWord myUrl)
-    (setq myWord
-          (if (use-region-p)
-              (buffer-substring-no-properties (region-beginning) (region-end))
-            (thing-at-point 'word)))
-
-    (setq myWord (replace-regexp-in-string " " "%20" myWord))
-    (setq myUrl (concat "https://translate.google.ru/#en/ru/" myWord))
-    (browse-url myUrl)
-    ;; (eww myUrl) ; emacs's own browser
-    ))
 
 (defun xah-copy-file-path (&optional @dir-path-only-p)
   "Copy the current buffer's file path or dired path to `kill-ring'. Result is full path."
@@ -123,5 +106,11 @@
       (apply 'call-process "/usr/bin/du" nil t nil "-sch" files)
       (message "Size of all marked files: %s"
                (progn
-                 (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*итого$")
+                 (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
+
+;; accept completion from copilot and fallback to company
+(defun my-tab ()
+  (interactive)
+  (or (copilot-accept-completion)
+      (company-indent-or-complete-common nil)))
