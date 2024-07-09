@@ -40,12 +40,30 @@
    )
   )
 
+(after! dired
+  ;; Add .. and . to dired
+  (remove-hook! 'dired-mode-hook 'dired-omit-mode nil)
+  (add-hook! 'dired-mode-hook 'dired-hide-details-mode)
+
+  (setq
+   ;; Всегда рекурсивное копирование
+   dired-recursive-deletes 'always
+   ;; Перемещать файлы в корзину при удаленнии
+   delete-by-moving-to-trash t
+   ;; Исправляет ошибку *(rsync) в dired
+   dired-rsync-options "-az"
+   )
+  )
+
+
 (after! org
   (setq
    ;; Hide headers after open file
    org-startup-folded t
    ;; Allow inline image previews of http(s)? urls or data uris.
    org-display-remote-inline-images 'skip
+   ;; Add logbook drawer
+   org-log-into-drawer t
    ))
 
 (map!
@@ -85,14 +103,6 @@
   :init
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
-
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-         ("C-<tab>" . 'copilot-accept-completion-by-word)
-         :map copilot-mode-map
-         ("<tab>" . 'my-tab)
-         ("TAB" . 'my-tab)))
 
 ;; default gpg package
 (use-package! epa

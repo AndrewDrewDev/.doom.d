@@ -109,8 +109,8 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
 
-;; accept completion from copilot and fallback to company
-(defun my-tab ()
+(defun my-clicboard-random-password()
+  "Generate a random password and copy it to the clipboard."
   (interactive)
-  (or (copilot-accept-completion)
-      (company-indent-or-complete-common nil)))
+  (kill-new (shell-command-to-string "openssl rand -base64 128 | head -c 128"))
+  (message "Password copied to clipboard"))
