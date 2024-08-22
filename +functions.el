@@ -114,3 +114,15 @@
   (interactive)
   (kill-new (shell-command-to-string "openssl rand -base64 128 | head -c 128"))
   (message "Password copied to clipboard"))
+
+(defun my/org-wrap-region-in-src-block (lang)
+  "Wrap the selected region in a `#+begin_src LANG` and `#+end_src`
+block with blank lines for padding."
+  (interactive "sLanguage: ")
+  (let* ((begin (region-beginning))
+         (end (region-end)))
+    (save-excursion
+      (goto-char begin)
+      (insert (concat "#+begin_src " lang "\n\n"))
+      (goto-char (+ end (length (concat "#+begin_src " lang "\n\n"))))
+      (insert "\n\n#+end_src\n"))))

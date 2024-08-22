@@ -2,7 +2,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 (load! "+functions")
 
-;; Оpen emacs fullscrean
+;; open emacs fullscrean
 (toggle-frame-maximized)
 
 
@@ -110,6 +110,15 @@
   :config
   ;; fix bug for emacs 29.1
   (fset 'epg-wait-for-status 'ignore))
+
+;; accept completion from copilot and fallback to company
+;; (use-package! copilot
+;;  :hook (prog-mode . copilot-mode)
+;;  :bind (:map copilot-completion-map
+;;              ("<tab>" . 'copilot-accept-completion)
+;;              ("TAB" . 'copilot-accept-completion)
+;;              ("C-TAB" . 'copilot-accept-completion-by-word)
+;;              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 ;; Enable native compilation
 (setq package-native-compile t)
