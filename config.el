@@ -5,7 +5,6 @@
 ;; open emacs fullscrean
 (toggle-frame-maximized)
 
-
 (setq
  doom-font (font-spec :family "Fira Code" :size 14.0)
  doom-theme 'doom-dracula
@@ -25,7 +24,15 @@
 
  ;; Macos
  mac-command-modifier 'meta
+
+ ;; tab width
+ tab-width 4
  )
+
+(after! doom-theme
+  ;; Позволяет удалять текущий буфер как в стандартном Emacs
+  (remove-hook! 'kill-buffer-hook 'centaur-tabs-buffer-track-killed))
+
 
 (after! dired
   ;; Add .. and . to dired
@@ -111,14 +118,16 @@
   ;; fix bug for emacs 29.1
   (fset 'epg-wait-for-status 'ignore))
 
-;; accept completion from copilot and fallback to company
-;; (use-package! copilot
-;;  :hook (prog-mode . copilot-mode)
-;;  :bind (:map copilot-completion-map
-;;              ("<tab>" . 'copilot-accept-completion)
-;;              ("TAB" . 'copilot-accept-completion)
-;;              ("C-TAB" . 'copilot-accept-completion-by-word)
-;;              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("C-n" . 'copilot-next-completion)
+              ("C-p" . 'copilot-previous-completion)))
+
 
 ;; Enable native compilation
 (setq package-native-compile t)

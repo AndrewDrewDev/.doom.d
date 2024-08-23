@@ -36,7 +36,7 @@
        file-templates    ; auto-snippets for empty files
        (format +onsave)  ; automated prettiness
        multiple-cursors  ; editing in many places at once
-       snippets          ; my elves. They type so I don't have to
+       ;;snippets          ; my elves. They type so I don't have to
 
        :emacs
        (dired +icons)             ; making dired pretty [functional]
